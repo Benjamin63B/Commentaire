@@ -7,20 +7,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const commentListContainer = document.querySelector('#comment-list');
     let commentCounter = 1;
   
-    // Check for existing comments in LocalStorage
+    // Vérifiez les commentaires existants dans LocalStorage
     const savedComments = JSON.parse(localStorage.getItem('comments')) || [];
   
-    // Display saved comments
+    // Afficher les commentaires enregistrés
     savedComments.forEach((comment) => {
       const newComment = displayComment(comment);
       commentListContainer.appendChild(newComment);
       commentCounter = Math.max(commentCounter, comment.id) + 1;
     });
   
-    // Add a hidden field for commentCounter
+    // Ajouter un champ masqué pour commentCounter
     form.insertAdjacentHTML('beforeend', `<input type="hidden" name="commentCounter" value="${commentCounter}">`);
   
-    // Submit form
+    // Soumettre le formulaire
     function submitForm(event) {
       event.preventDefault();
   
@@ -44,19 +44,19 @@ document.addEventListener('DOMContentLoaded', () => {
   
       form.reset();
   
-      // Update commentCounter
+      // Mettre à jour le compteur de commentaires
       commentCounter++;
       form.insertAdjacentHTML('beforeend', `<input type="hidden" name="commentCounter" value="${commentCounter}">`);
   
-      // Save the comment to LocalStorage
+      // Enregistrez le commentaire dans LocalStorage
       savedComments.push(newComment);
       localStorage.setItem('comments', JSON.stringify(savedComments));
     }
   
-    // Add event listener to the form
+    // Ajouter un écouteur d'événement au formulaire
     form.addEventListener('submit', submitForm);
   
-    // Display comment function
+    // Fonction d'affichage des commentaires
     function displayComment(comment) {
       const newComment = document.createElement('div');
       newComment.classList.add(
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return newComment;
     }
   
-    // Add event listener for error message
+    // Ajouter un écouteur d'événement pour le message d'erreur
     document.getElementById("comment-form").addEventListener("submit", function (event) {
       if (firstNameField.value.length === 0 || lastNameField.value.length === 0 || messageField.value.length === 0) {
         event.preventDefault();
